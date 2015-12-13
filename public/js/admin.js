@@ -70,7 +70,7 @@ function register() {
             'Content-Type': 'application/json'
         },
         'type': 'POST',
-        'url': '/account/register',
+        'url': '/account',
         'async': false,
         'data': JSON.stringify({'login': login, 'password': password}),
         'dataType': 'json',

@@ -14,8 +14,16 @@ CREATE TABLE "post" (
     "categoryId" SERIAL REFERENCES "category" (id)
   )
 
+CREATE TABLE "account" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "login" VARCHAR NOT NULL,
+    "password" VARCHAR NOT NULL
+  )
+
+
 # --- !Downs
 
 DROP TABLE "category";
 DROP TABLE "post";
+DROP TABLE "account";
 
