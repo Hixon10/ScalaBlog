@@ -1,18 +1,18 @@
 
 
 # Category
-GET    /category        controllers.Categories.index
-POST   /category        controllers.Categories.create
-PUT    /category/:id    controllers.Categories.update(id: Int)
-DELETE /category/:id    controllers.Categories.delete(id: Int)
-GET    /category/:id    controllers.Categories.show(id: Int)
+GET    /category                         controllers.Categories.index
+POST   /category/:login/:password        controllers.Categories.create(login: String, password: String)
+PUT    /category/:id/:login/:password    controllers.Categories.update(id: Int, login: String, password: String)
+DELETE /category/:id/:login/:password    controllers.Categories.delete(id: Int, login: String, password: String)
+GET    /category/:id                     controllers.Categories.show(id: Int)
 
 # Post
-GET    /post        controllers.Posts.index
-POST   /post        controllers.Posts.create
-PUT    /post/:id    controllers.Posts.update(id: Int)
-DELETE /post/:id    controllers.Posts.delete(id: Int)
-GET    /post/:id    controllers.Posts.show(id: Int)
+GET    /post                         controllers.Posts.index
+POST   /post/:login/:password        controllers.Posts.create(login: String, password: String)
+PUT    /post/:id/:login/:password    controllers.Posts.update(id: Int, login: String, password: String)
+DELETE /post/:id/:login/:password    controllers.Posts.delete(id: Int, login: String, password: String)
+GET    /post/:id                     controllers.Posts.show(id: Int)
 
 
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

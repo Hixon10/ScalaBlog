@@ -37,7 +37,7 @@ class Posts extends Controller with PostTable {
     )(Post.apply)(Post.unapply)
   )
 
-  def create = Action.async { implicit request =>
+  def create(login: String, password: String) = Action.async { implicit request =>
     postForm.bindFromRequest.fold(
       formWithErrors => {
         scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
@@ -48,7 +48,7 @@ class Posts extends Controller with PostTable {
     )
   }
 
-  def update(id: Int) = Action.async { implicit request =>
+  def update(id: Int, login: String, password: String) = Action.async { implicit request =>
     postForm.bindFromRequest.fold(
       formWithErrors => {
         scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
@@ -59,7 +59,7 @@ class Posts extends Controller with PostTable {
     )
   }
 
-  def delete(id: Int) = Action.async {
+  def delete(id: Int, login: String, password: String) = Action.async {
     PostTable.destroy(id).map(_ => Ok(Json.toJson("deleted")))
   }
 

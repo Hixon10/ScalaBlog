@@ -4,7 +4,8 @@ var posts = [];
 var categories = [];
 
 function getLogin() {
-    return Cookies.get('login');
+    return "fakeLogin";
+    //return Cookies.get('login');
 }
 
 function setLogin(login) {
@@ -12,7 +13,8 @@ function setLogin(login) {
 }
 
 function getPassword() {
-    return Cookies.get('password');
+    return "fakePassword";
+    //return Cookies.get('password');
 }
 
 function setPassword(pas) {
@@ -100,9 +102,9 @@ function updatePost() {
             'Content-Type': 'application/json'
         },
         'type': 'PUT',
-        'url': '/admin/post/' + getLogin() + '/' + getPassword() + '?categoryId=' + categoryId + '&postId=' + id,
+        'url': '/post/' + id + '/' + getLogin() + '/' + getPassword(),
         'async': false,
-        'data': JSON.stringify({'title': title, 'content': content}),
+        'data': JSON.stringify({'title': title, 'content': content, 'categoryId' : categoryId}),
         'dataType': 'json',
         success: function(result) {
         },
@@ -128,7 +130,7 @@ function deletePost(id) {
             'Content-Type': 'application/json'
         },
         'type': 'DELETE',
-        'url': '/admin/post/' + getLogin() + '/' + getPassword() + '?postId=' + id,
+        'url': '/post/' + id + '/' + getLogin() + '/' + getPassword(),
         'async': false,
         'dataType': 'json',
         success: function(result) {
@@ -150,9 +152,9 @@ function createPost() {
             'Content-Type': 'application/json'
         },
         'type': 'POST',
-        'url': '/admin/post/' + getLogin() + '/' + getPassword() + '?categoryId=' + id,
+        'url': '/post/' + getLogin() + '/' + getPassword(),
         'async': false,
-        'data': JSON.stringify({'title': title, content: content}),
+        'data': JSON.stringify({'title': title, content: content, categoryId: id}),
         'dataType': 'json',
         success: function(result) {
         },
@@ -179,7 +181,7 @@ function updateCategory() {
             'Content-Type': 'application/json'
         },
         'type': 'PUT',
-        'url': '/admin/category/' + getLogin() + '/' + getPassword() + '?categoryId=' + id,
+        'url': '/category/' + id + '/' + getLogin() + '/' + getPassword(),
         'async': false,
         'data': JSON.stringify({'title': title}),
         'dataType': 'json',
@@ -207,7 +209,7 @@ function createCategory() {
             'Content-Type': 'application/json'
         },
         'type': 'POST',
-        'url': '/admin/category/' + getLogin() + '/' + getPassword(),
+        'url': '/category/' + getLogin() + '/' + getPassword(),
         'async': false,
         'data': JSON.stringify({'title': title}),
         'dataType': 'json',
@@ -233,7 +235,7 @@ function deleteCategory(id) {
             'Content-Type': 'application/json'
         },
         'type': 'DELETE',
-        'url': '/admin/category/' + getLogin() + '/' + getPassword() + '?categoryId=' + id,
+        'url': '/category/' + id + '/' + getLogin() + '/' + getPassword(),
         'async': false,
         'dataType': 'json',
         success: function(result) {
@@ -251,7 +253,7 @@ function initCategories() {
             'Content-Type': 'application/json'
         },
         'type': 'GET',
-        'url': '/admin/category',
+        'url': '/category',
         'async': false,
         'dataType': 'json',
         success: function(result) {
@@ -293,7 +295,7 @@ function initPosts() {
             'Content-Type': 'application/json'
         },
         'type': 'GET',
-        'url': '/admin/post',
+        'url': '/post',
         'async': false,
         'dataType': 'json',
         success: function(result) {
@@ -306,7 +308,6 @@ function initPosts() {
     for (var i = 0; i < posts.length; i++) {
         postsHtml += '<tr>';
         postsHtml += '<td>' + posts[i].title + '</td>';
-        postsHtml += '<td>' + posts[i].createdDate.month + ' ' + posts[i].createdDate.dayOfMonth + ', ' + posts[i].createdDate.year + '</td>';
         postsHtml += '<td>';
         postsHtml += '<button data-post_id="' + posts[i].id + '" type="button" class="updatePostButton btn btn-default btn-xs">Редактировать</button>';
         postsHtml += '</td>';

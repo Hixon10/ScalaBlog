@@ -35,7 +35,7 @@ class Categories extends Controller with CategoryTable {
     )(Category.apply)(Category.unapply)
   )
 
-  def create = Action.async { implicit request =>
+  def create(login: String, password: String) = Action.async { implicit request =>
     categoryForm.bindFromRequest.fold(
       formWithErrors => {
         scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
@@ -46,7 +46,7 @@ class Categories extends Controller with CategoryTable {
     )
   }
 
-  def update(id: Int) = Action.async { implicit request =>
+  def update(id: Int, login: String, password: String) = Action.async { implicit request =>
     categoryForm.bindFromRequest.fold(
       formWithErrors => {
         scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
@@ -57,7 +57,7 @@ class Categories extends Controller with CategoryTable {
     )
   }
 
-  def delete(id: Int) = Action.async {
+  def delete(id: Int, login: String, password: String) = Action.async {
     CategoryTable.destroy(id).map(_ => Ok(Json.toJson("deleted")))
   }
 
