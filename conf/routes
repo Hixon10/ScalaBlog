@@ -1,0 +1,13 @@
+# Category
+GET    /category        controllers.Categories.index
+POST   /category        controllers.Categories.create
+PUT    /category/:id    controllers.Categories.update(id: Int)
+DELETE /category/:id    controllers.Categories.delete(id: Int)
+GET    /category/:id    controllers.Categories.show(id: Int)
+
+# Post
+GET    /post        controllers.Posts.index
+POST   /post        controllers.Posts.create
+PUT    /post/:id    controllers.Posts.update(id: Int)
+DELETE /post/:id    controllers.Posts.delete(id: Int)
+GET    /post/:id    controllers.Posts.show(id: Int)
