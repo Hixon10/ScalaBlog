@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="/assets/favicon.ico">
+
+    <title>Некоторый блог</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/blog.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/client.js"></script>
+</head>
+
+<body>
+
+<div class="blog-masthead">
+    <div class="container">
+        <nav class="blog-nav">
+            <a id="homePageLink" class="blog-nav-item active" href="#">Главная</a>
+            <a target="_blank" class="blog-nav-item" href="/admin.html">Админка</a>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="blog-header">
+        <h1 class="blog-title">Некоторый блог</h1>
+    </div>
+
+    <div class="row">
+
+        <div id="contentContainer" class="col-sm-8 blog-main">
+            <!-- blog posts -->
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module">
+                <form role="search" class="search-form">
+                    <div class="input-group">
+                        <input type="text" id="s" name="s" placeholder="Поиск" class="form-control">
+                        <div class="input-group-btn">
+                            <button id="searchButton" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="sidebar-module">
+                <h4>Категории</h4>
+                <ol id="categoryList" class="list-unstyled">
+                </ol>
+            </div>
+        </div><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+</div><!-- /.container -->
+
+<footer class="blog-footer">
+    <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
+</footer>
+
+
+</body>
+</html>

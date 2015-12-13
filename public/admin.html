@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/assets/favicon.ico">
+
+    <title>Админка</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/dashboard.css" rel="stylesheet">
+
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.cookie.js"></script>
+    <script src="/assets/js/admin.js"></script>
+
+</head>
+
+<body>
+
+
+
+<!-- Modal register -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="registerModalLabel">Регистрация</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="login">Логин</label>
+                    <input type="text" class="form-control" id="login" placeholder="login" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="password" placeholder="password" required="required">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button id="registerButton" type="button" class="btn btn-primary">Зарегистрироваться</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal login -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="loginModalLabel">Аутентификация</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="login">Логин</label>
+                    <input type="text" class="form-control" id="loginLogin" placeholder="login" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="passwordLogin" placeholder="password" required="required">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button id="loginButton" type="button" class="btn btn-primary">Войти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal update post -->
+<div class="modal fade" id="updatePostModal" tabindex="-1" role="dialog" aria-labelledby="updatePostModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="updatePostModalLabel">Изменение поста</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="updatedPostTitle">Название поста</label>
+                        <input type="text" class="form-control" id="updatedPostTitle" placeholder="Название" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedPostCategory">Категория</label>
+                        <select class="form-control" id="updatedPostCategory">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Текст</label>
+                        <textarea class="form-control" id="updatedPostContent" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button data-post_id="0" id="updatePost" type="button" class="updatePost btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal create post -->
+<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="editPostModalLabel">Создание поста</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="postTitle">Название поста</label>
+                        <input type="text" class="form-control" id="postTitle" placeholder="Название" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="postCategory">Категория</label>
+                        <select class="form-control" id="postCategory">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Текст</label>
+                        <textarea class="form-control" id="postContent" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" class="createPost btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal create category -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="editCategoryModalLabel">Создание категории</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="categoryTitle">Название категории</label>
+                        <input type="text" class="form-control" id="categoryTitle" placeholder="Название" required="required">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button id="saveCategory" type="button" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal update category -->
+<div class="modal fade" id="updateCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="updateCategoryModalLabel">Изменение категории</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="postTitle">Название категории</label>
+                        <input type="text" class="form-control" id="categoryNewTitle" placeholder="Название" required="required">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button data-caregory_id="0" id="updateCategory" type="button" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Главная</a>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="registerLink" class="blog-nav-item" href="#">Регистрация</a></li>
+                <li><a id="loginLink" class="blog-nav-item" href="#">Войти</a></li>
+                <li><a id="logoutLink" class="hidden blog-nav-item" href="#">Привет, NAME. Выйти</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar" role="tablist">
+                <li role="presentation" class="active"><a href="#posts" aria-controls="posts" role="tab" data-toggle="tab">Посты</a></li>
+                <li role="presentation"><a href="#caregories" aria-controls="caregories" role="tab" data-toggle="tab">Категории</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="tab-content">
+
+                <!-- Посты -->
+                <div role="tabpanel" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main tab-pane active" id="posts">
+                    <h1 class="page-header">Ваши Посты</h1>
+
+                    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#editPostModal">
+                        Создать
+                    </button>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="postsTable">
+                            <thead>
+                            <tr>
+                                <th>Заголовок</th>
+                                <th>Дата создания</th>
+                                <th>Редактирование</th>
+                                <th>Удаление</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Посты -->
+
+
+                <!-- Категории -->
+                <div role="tabpanel" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main tab-pane" id="caregories">
+                    <h1 class="page-header">Ваши категории</h1>
+
+                    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#editCategoryModal">
+                        Создать
+                    </button>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="categoriesTable">
+                            <thead>
+                            <tr>
+                                <th>Заголовок</th>
+                                <th>Редактирование</th>
+                                <th>Удаление</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Категории -->
+
+            </div>
+        </div>
+        <!-- Закрывающая табов -->
+
+    </div>
+</div>
+
+</body>
+
+</html>

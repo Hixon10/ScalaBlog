@@ -1,3 +1,5 @@
+
+
 # Category
 GET    /category        controllers.Categories.index
 POST   /category        controllers.Categories.create
@@ -11,3 +13,8 @@ POST   /post        controllers.Posts.create
 PUT    /post/:id    controllers.Posts.update(id: Int)
 DELETE /post/:id    controllers.Posts.delete(id: Int)
 GET    /post/:id    controllers.Posts.show(id: Int)
+
+
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /admin.html                 controllers.Assets.at(path="/public", file="admin.html")
+GET     /                           controllers.Assets.at(path="/public", file="index.html")
