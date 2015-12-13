@@ -11,7 +11,7 @@ function init() {
             'Content-Type': 'application/json'
         },
         'type': 'GET',
-        'url': '/admin/category',
+        'url': '/category',
         'async': false,
         'dataType': 'json',
         success: function(result) {
@@ -25,7 +25,7 @@ function init() {
             'Content-Type': 'application/json'
         },
         'type': 'GET',
-        'url': '/admin/post',
+        'url': '/post',
         'async': false,
         'dataType': 'json',
         success: function(result) {
@@ -40,7 +40,6 @@ function insertPosts(posts) {
     for (var i = 0; i < posts.length; i++) {
         postsHtml += '<div class="blog-post">';
         postsHtml += '<h2 class="blog-post-title">' + posts[i].title + '</h2>';
-        postsHtml += '<p class="blog-post-meta">' + posts[i].createdDate.month + ' ' + posts[i].createdDate.dayOfMonth + ', ' + posts[i].createdDate.year + '</p>';
         postsHtml += '<div>' + posts[i].content + '</div>';
         postsHtml += '</div>';
     }
@@ -52,7 +51,7 @@ function insertAllCategories() {
     var categoriesHtml = "";
 
     for (var i = 0; i < categories.length; i++) {
-        categoriesHtml += '<li><a data-category_title="' + categories[i].title + '" class="categoryLink" href="#">' + categories[i].title + '</a></li>';
+        categoriesHtml += '<li><a data-category_title="' + categories[i].title + '" class="categoryLink">' + categories[i].title + '</a></li>';
     }
 
     $('#categoryList').html(categoriesHtml);
@@ -61,18 +60,15 @@ function insertAllCategories() {
 function searchPosts() {
     var query = $('#s').val();
 
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'type': 'GET',
-        'url': '/post/search?query=' + query,
-        'dataType': 'json',
-        success: function(result) {
-            insertPosts(result);
+    var p = [];
+
+    for (var i = 0; i < posts.length; i++) {
+        if (posts[i].title.indexOf(query) > -1) {
+            p.push(posts[i]);
         }
-    });
+    }
+
+    insertPosts(p);
 }
 
 $(document).ready(function() {
@@ -93,12 +89,23 @@ $(document).ready(function() {
     $('body').on('click', 'a.categoryLink', function() {
         var $el = $(this);
         var categoryTitle = $el.data('category_title');
+        var p = [];
 
-        for (var i = 0; i < categories.length; i++) {
-            if (categories[i].title == categoryTitle) {
-                insertPosts(categories[i].posts);
+        var categoryId = 0;
+        for (var j = 0; j < categories.length; j++) {
+            if (categories[j].title == categoryTitle) {
+                categoryId = categories[j].id;
                 break;
             }
         }
+
+        for (var i = 0; i < posts.length; i++) {
+            if (posts[i].categoryId == categoryId) {
+                p.push(posts[i])
+            }
+        }
+
+        insertPosts(p);
+        return;
     });
 });
