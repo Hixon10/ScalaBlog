@@ -7,6 +7,7 @@ import slick.driver.JdbcProfile
 import slick.driver.PostgresDriver.api._
 import slick.lifted.Tag
 import play.api.libs.json.{JsValue, Writes, Json}
+import javax.sql.DataSource
 
 object AccountTable extends AccountTable
 
@@ -39,6 +40,15 @@ trait AccountTable extends HasDatabaseConfig[JdbcProfile]{
   def create(account: Account) = db.run(accounts += account)
 
   def destroy(id: Int) = db.run(find(id).delete)
+
+  def checkAccount(login: String, password: String): Boolean = {
+    ///TODO implement method
+    true
+  }
+
+//  def checkAccount(login: String, password: String): Boolean = db.run(findByLogin(login, password).result.headOption)
+
+  private def findByLogin(login: String, password: String) = accounts.filter(x => (x.password === password && x.login === login))
 
   private def find(id: Int) = accounts.filter(_.id === id)
 

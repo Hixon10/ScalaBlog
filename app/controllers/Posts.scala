@@ -38,29 +38,45 @@ class Posts extends Controller with PostTable {
   )
 
   def create(login: String, password: String) = Action.async { implicit request =>
-    postForm.bindFromRequest.fold(
-      formWithErrors => {
-        scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
-      },
-      p => {
-        PostTable.create(p).map(_ => Ok(Json.toJson(p)))
-      }
-    )
+    if (!AccountTable.checkAccount(login, password)) {
+      scala.concurrent.Future{BadRequest("There is no account with login " + login)}
+    } else {
+      postForm.bindFromRequest.fold(
+        formWithErrors => {
+          scala.concurrent.Future {
+            BadRequest(formWithErrors.errorsAsJson)
+          }
+        },
+        p => {
+          PostTable.create(p).map(_ => Ok(Json.toJson(p)))
+        }
+      )
+    }
   }
 
   def update(id: Int, login: String, password: String) = Action.async { implicit request =>
-    postForm.bindFromRequest.fold(
-      formWithErrors => {
-        scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
-      },
-      p => {
-        PostTable.update(id, p).map(_ => Ok(Json.toJson(p)))
-      }
-    )
+    if (!AccountTable.checkAccount(login, password)) {
+      scala.concurrent.Future{BadRequest("There is no account with login " + login)}
+    } else {
+      postForm.bindFromRequest.fold(
+        formWithErrors => {
+          scala.concurrent.Future {
+            BadRequest(formWithErrors.errorsAsJson)
+          }
+        },
+        p => {
+          PostTable.update(id, p).map(_ => Ok(Json.toJson(p)))
+        }
+      )
+    }
   }
 
   def delete(id: Int, login: String, password: String) = Action.async {
-    PostTable.destroy(id).map(_ => Ok(Json.toJson("deleted")))
+    if (!AccountTable.checkAccount(login, password)) {
+      scala.concurrent.Future{BadRequest("There is no account with login " + login)}
+    } else {
+      PostTable.destroy(id).map(_ => Ok(Json.toJson("deleted")))
+    }
   }
 
 }

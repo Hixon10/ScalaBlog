@@ -36,29 +36,46 @@ class Categories extends Controller with CategoryTable {
   )
 
   def create(login: String, password: String) = Action.async { implicit request =>
-    categoryForm.bindFromRequest.fold(
-      formWithErrors => {
-        scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
-      },
-      cat => {
-        CategoryTable.create(cat).map(_ => Ok(Json.toJson(cat)))
-      }
-    )
+    if (!AccountTable.checkAccount(login, password)) {
+      scala.concurrent.Future{BadRequest("There is no account with login " + login)}
+    } else {
+      categoryForm.bindFromRequest.fold(
+        formWithErrors => {
+          scala.concurrent.Future {
+            BadRequest(formWithErrors.errorsAsJson)
+          }
+        },
+        cat => {
+          CategoryTable.create(cat).map(_ => Ok(Json.toJson(cat)))
+        }
+      )
+    }
   }
 
   def update(id: Int, login: String, password: String) = Action.async { implicit request =>
-    categoryForm.bindFromRequest.fold(
-      formWithErrors => {
-        scala.concurrent.Future{BadRequest(formWithErrors.errorsAsJson)}
-      },
-      cat => {
-        CategoryTable.update(id, cat).map(_ => Ok(Json.toJson(cat)))
-      }
-    )
+    if (!AccountTable.checkAccount(login, password)) {
+      scala.concurrent.Future{BadRequest("There is no account with login " + login)}
+    } else {
+
+      categoryForm.bindFromRequest.fold(
+        formWithErrors => {
+          scala.concurrent.Future {
+            BadRequest(formWithErrors.errorsAsJson)
+          }
+        },
+        cat => {
+          CategoryTable.update(id, cat).map(_ => Ok(Json.toJson(cat)))
+        }
+      )
+    }
   }
 
   def delete(id: Int, login: String, password: String) = Action.async {
-    CategoryTable.destroy(id).map(_ => Ok(Json.toJson("deleted")))
+    if (!AccountTable.checkAccount(login, password)) {
+      scala.concurrent.Future{BadRequest("There is no account with login " + login)}
+    } else {
+      CategoryTable.destroy(id).map(_ => Ok(Json.toJson("deleted")))
+    }
   }
 
 }

@@ -37,4 +37,12 @@ class Accounts extends Controller with AccountTable {
     )
   }
 
+  def checkLogin(login: String, password: String) = Action {
+    if (!AccountTable.checkAccount(login, password)) {
+      BadRequest("There is no account with login " + login)
+    } else {
+      Ok("")
+    }
+  }
+
 }

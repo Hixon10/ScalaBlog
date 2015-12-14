@@ -4,8 +4,8 @@ var posts = [];
 var categories = [];
 
 function getLogin() {
-    return "fakeLogin";
-    //return Cookies.get('login');
+    //return "fakeLogin";
+    return Cookies.get('login');
 }
 
 function setLogin(login) {
@@ -13,8 +13,8 @@ function setLogin(login) {
 }
 
 function getPassword() {
-    return "fakePassword";
-    //return Cookies.get('password');
+    //return "fakePassword";
+    return Cookies.get('password');
 }
 
 function setPassword(pas) {
@@ -30,8 +30,8 @@ function loginF() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        'type': 'POST',
-        'url': '/account/login',
+        'type': 'GET',
+        'url': '/account/' + log + '/' + pas,
         'async': false,
         'data': JSON.stringify({'login': log, 'password': pas}),
         'dataType': 'json',
@@ -41,8 +41,7 @@ function loginF() {
             var response = jqXHR.responseText;
 
             if (response) {
-                response = JSON.parse(response);
-                alert(response.message);
+                alert(response);
                 location.reload(true);
             }
         }
@@ -80,8 +79,9 @@ function register() {
             var response = jqXHR.responseText;
 
             if (response) {
-                response = JSON.parse(response);
-                alert(response.message);
+                alert(response);
+                //response = JSON.parse(response);
+                //alert(response.message);
             }
         }
     });
@@ -112,10 +112,11 @@ function updatePost() {
             var response = jqXHR.responseText;
 
             if (response) {
-                response = JSON.parse(response);
-                response = response["errors"][0];
-                var message = response["defaultMessage"];
-                alert(message);
+                alert("Error occurs.");
+                //response = JSON.parse(response);
+                //response = response["errors"][0];
+                //var message = response["defaultMessage"];
+                //alert(message);
             }
         }
     });
@@ -162,8 +163,9 @@ function createPost() {
             var response = jqXHR.responseText;
 
             if (response) {
-                response = JSON.parse(response);
-                alert(response.message);
+                alert("Error occurs.");
+                //response = JSON.parse(response);
+                //alert(response.message);
             }
         }
     });
@@ -191,8 +193,9 @@ function updateCategory() {
             var response = jqXHR.responseText;
 
             if (response) {
-                response = JSON.parse(response);
-                alert(response.message);
+                alert("Error occurs.");
+                //response = JSON.parse(response);
+                //alert(response.message);
             }
         }
     });
@@ -219,8 +222,9 @@ function createCategory() {
             var response = jqXHR.responseText;
 
             if (response) {
-                response = JSON.parse(response);
-                alert(response.message);
+                alert("Error occurs.");
+                //response = JSON.parse(response);
+                //alert(response.message);
             }
         }
     });

@@ -15,7 +15,8 @@ DELETE /post/:id/:login/:password    controllers.Posts.delete(id: Int, login: St
 GET    /post/:id                     controllers.Posts.show(id: Int)
 
 #Account
-POST   /account        controllers.Accounts.create
+POST   /account                      controllers.Accounts.create
+GET    /account/:login/:password     controllers.Accounts.checkLogin(login: String, password: String)
 
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 GET     /admin.html                 controllers.Assets.at(path="/public", file="admin.html")
